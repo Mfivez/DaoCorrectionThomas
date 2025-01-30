@@ -1,13 +1,14 @@
 package com.example.jdbci.dao;
 
-import com.example.jdbci.ConnectionFactory;
+import com.example.jdbci.utils.ConnectionFactory;
 import com.example.jdbci.models.User;
+import com.example.jdbci.repositories.UserRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements UserRepository{
+public class UserDAO implements UserRepository {
     @Override
     public List<User> getAll() {
         // SELECT * FROM user

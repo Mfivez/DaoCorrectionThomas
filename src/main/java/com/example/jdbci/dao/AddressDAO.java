@@ -1,13 +1,15 @@
 package com.example.jdbci.dao;
 
-import com.example.jdbci.ConnectionFactory;
+import com.example.jdbci.utils.ConnectionFactory;
 import com.example.jdbci.models.Address;
+import com.example.jdbci.repositories.AddressRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressDAO implements AddressRepository{
+public class AddressDAO implements AddressRepository {
+
     @Override
     public List<Address> getAll() {
         List<Address> addresses = new ArrayList<Address>();

@@ -1,4 +1,4 @@
-package com.example.jdbci;
+package com.example.jdbci.utils;
 
 import com.example.jdbci.models.Address;
 import com.example.jdbci.models.Book;
@@ -38,7 +38,7 @@ public class ConnectionFactory {
             statement.executeUpdate(Book.queryCreateTable());
             statement.executeUpdate(Borrowing.queryCreateTable());
 
-        }catch(SQLException error){
+        } catch(SQLException error){
             System.out.println(error.getMessage());
         }
     }

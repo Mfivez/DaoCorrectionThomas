@@ -1,17 +1,19 @@
 package com.example.jdbci.dao;
 
-import com.example.jdbci.ConnectionFactory;
+import com.example.jdbci.utils.ConnectionFactory;
 import com.example.jdbci.models.Book;
+import com.example.jdbci.repositories.BookRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAO implements BookRepository{
+public class BookDAO implements BookRepository {
 
     @Override
     public List<Book> getAll() {
         List<Book> books = new ArrayList<>();
+
         try (
                 Connection connection = ConnectionFactory.connection();
                 Statement statement = connection.createStatement();
@@ -26,6 +28,7 @@ public class BookDAO implements BookRepository{
                         rs.getBoolean("available")
                 ));
             }
+
             return books;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -39,6 +42,7 @@ public class BookDAO implements BookRepository{
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM book WHERE id = ?")
         ) {
             statement.setInt(1, id);
+
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     return new Book(
@@ -125,6 +129,7 @@ public class BookDAO implements BookRepository{
                     ));
                 }
             }
+
             return books;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

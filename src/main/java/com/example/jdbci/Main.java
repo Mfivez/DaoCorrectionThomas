@@ -5,10 +5,12 @@ import com.example.jdbci.models.Address;
 import com.example.jdbci.models.Book;
 import com.example.jdbci.models.Borrowing;
 import com.example.jdbci.models.User;
+import com.example.jdbci.utils.ConnectionFactory;
 
 import java.time.LocalDateTime;
 
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("Hello, World!");
         ConnectionFactory.createDropTable();
@@ -17,6 +19,7 @@ public class Main {
         doCrudOnBook();
         doCrudOnBorrowing();
     }
+
     public static void doCrudOnUser(){
         int id = 1;
         // region INSERT

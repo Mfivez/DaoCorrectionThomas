@@ -73,6 +73,7 @@ public class Book {
                 "available BOOLEAN DEFAULT true\n" +
                 ");";
     }
+
     @Override
     public String toString() {
         return "Book{" +

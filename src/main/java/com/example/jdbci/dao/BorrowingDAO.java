@@ -1,7 +1,8 @@
 package com.example.jdbci.dao;
 
-import com.example.jdbci.ConnectionFactory;
+import com.example.jdbci.utils.ConnectionFactory;
 import com.example.jdbci.models.Borrowing;
+import com.example.jdbci.repositories.BorrowingRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -72,8 +73,9 @@ public class BorrowingDAO implements BorrowingRepository {
             statement.setInt(1, borrowing.getUserId());
             statement.setInt(2, borrowing.getBookId());
             statement.setTimestamp(3, Timestamp.valueOf(borrowing.getBorrowDate()));
-            statement.setTimestamp(4, borrowing.getReturnDate() != null ?
-                    Timestamp.valueOf(borrowing.getReturnDate()) : null);
+            statement.setTimestamp(4, borrowing.getReturnDate() != null
+                    ? Timestamp.valueOf(borrowing.getReturnDate())
+                    : null );
             statement.setBoolean(5, borrowing.isReturned());
 
             // Mettre à jour la disponibilité du livre
@@ -163,6 +165,7 @@ public class BorrowingDAO implements BorrowingRepository {
     @Override
     public List<Borrowing> findOverdueBooks() {
         List<Borrowing> borrowings = new ArrayList<>();
+
         try (
                 Connection connection = ConnectionFactory.connection();
                 PreparedStatement statement = connection.prepareStatement(
@@ -176,8 +179,9 @@ public class BorrowingDAO implements BorrowingRepository {
                             rs.getInt("user_id"),
                             rs.getInt("book_id"),
                             rs.getTimestamp("borrow_date").toLocalDateTime(),
-                            rs.getTimestamp("return_date") != null ?
-                                    rs.getTimestamp("return_date").toLocalDateTime() : null,
+                            rs.getTimestamp("return_date") != null
+                                    ? rs.getTimestamp("return_date").toLocalDateTime()
+                                    : null,
                             rs.getBoolean("returned")
                     ));
                 }
